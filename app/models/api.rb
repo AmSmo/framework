@@ -16,7 +16,7 @@ class Api < ApplicationRecord
         Api.api_call(url)
     end
 
-    def self.keyword_search(keyword)
+    def self.keyword_search(keyword)    
         url = "https://api.harvardartmuseums.org/object?keyword=#{keyword}&size=10&apikey=#{ENV['HAM_KEY']}"
         Api.api_call(url)
     end
