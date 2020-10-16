@@ -64,6 +64,7 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    bcrypt (3.1.16)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -83,6 +84,7 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jsonapi-renderer (0.2.2)
+    jwt (2.2.2)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -168,9 +170,11 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   annotate
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   dotenv-rails
+  jwt
   listen (~> 3.2)
   net-http
   pg (>= 0.18, < 2.0)
