@@ -11,7 +11,7 @@ class GalleriesController < ApplicationController
         #  if results["info"]["next"]
             # next_page = results["info"]["pages"].to_i + 1
     # end
-        byebug
+        
         render json: results
     end
 
@@ -20,7 +20,7 @@ class GalleriesController < ApplicationController
         # gallerynumber = results["records"][0]["gallerynumber"]
         # decription = results["records"][0]["labeltext"]
         # name = results["records"][0]["name"]
-        byebug
+        
         render json: results
     end
 
