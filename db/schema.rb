@@ -10,16 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_131729) do
+ActiveRecord::Schema.define(version: 2020_10_17_012701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "floor_galleries", force: :cascade do |t|
+    t.bigint "floor_id", null: false
+    t.bigint "gallery_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["floor_id"], name: "index_floor_galleries_on_floor_id"
+    t.index ["gallery_id"], name: "index_floor_galleries_on_gallery_id"
+  end
+
+  create_table "floors", force: :cascade do |t|
+    t.integer "number"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "galleries", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "theme"
+    t.string "description"
+    t.integer "ham_id"
     t.index ["user_id"], name: "index_galleries_on_user_id"
   end
 
@@ -52,6 +71,8 @@ ActiveRecord::Schema.define(version: 2020_10_16_131729) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "floor_galleries", "floors"
+  add_foreign_key "floor_galleries", "galleries"
   add_foreign_key "galleries", "users"
   add_foreign_key "gallery_paintings", "galleries"
   add_foreign_key "gallery_paintings", "paintings"
