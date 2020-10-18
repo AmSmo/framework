@@ -29,7 +29,11 @@ class Api < ApplicationRecord
 
     def self.keyword_search(keyword)    
         url = "https://api.harvardartmuseums.org/object?keyword=#{keyword}&size=10&apikey=#{ENV['HAM_KEY']}"
-        Api.api_call(url)
+        response = Api.api_call(url)
+        with_images = response["records"].select do |resp|
+            resp["images"] && resp["images"].length > 0
+        end
+        return with_images
     end
     
 end

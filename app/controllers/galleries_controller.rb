@@ -4,7 +4,7 @@ class GalleriesController < ApplicationController
         
         prettified = results.map do |result|
     
-            {images: result["images"][0]["baseimageurl"],
+            {image: result["images"][0]["baseimageurl"],
                 division: result["division"],
                 blurb: result["labeltext"],
                 artist: result["people"][0]["name"],
