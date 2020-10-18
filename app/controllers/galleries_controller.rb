@@ -1,15 +1,19 @@
 class GalleriesController < ApplicationController
+    
     def show
         results = Api.gallery(params[:id])
         
         prettified = results.map do |result|
-    
+            
             {image: result["images"][0]["baseimageurl"],
+            title: result["title"],
                 division: result["division"],
                 blurb: result["labeltext"],
                 artist: result["people"][0]["name"],
                 dated: result["dated"],
-                medium: result["medium"]}
+                medium: result["medium"],
+                    ham_id: result["id"]
+            }
             
         end
         

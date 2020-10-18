@@ -1,7 +1,21 @@
 class PaintingsController < ApplicationController
-
-    def show
-        # results = Api.(params[:id])
+    skip_before_action :authorized
+   
+     def show
+        single_painting = Api.painting(params[:id])
+        
+        result = {image: single_painting["images"][0]["baseimageurl"],
+            title: single_painting["title"],
+                division: single_painting["division"],
+                blurb: single_painting["labeltext"],
+                artist: single_painting["people"][0]["name"],
+                dated: single_painting["dated"],
+                medium: single_painting["medium"],
+                    ham_id: single_painting["objectid"],
+                    gallery_id: single_painting["gallery"]["galleryid"]
+            }
+            
+        render json: result, status: :accepted
     end
 
     def search
@@ -13,7 +27,10 @@ class PaintingsController < ApplicationController
                     blurb: result["labeltext"],
                     artist: result["people"][0]["name"],
                     dated: result["dated"],
-                    medium: result["medium"]}
+                    medium: result["medium"],
+                    ham_id: result["id"],
+                    gallery_id: single_painting["gallery"]["galleryid"]
+                }
                 
             end
             prettified.compact!
@@ -24,5 +41,7 @@ class PaintingsController < ApplicationController
             render json: {errors: ['no results']}, status: :accepted
         end
     end
+
+   
     
 end
