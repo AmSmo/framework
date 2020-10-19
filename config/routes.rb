@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post 'users/favorites', to: "users#add_favorites"
+  get 'users/favorites', to: "galleries#my_gallery"
   resources :galleries
   resources :paintings
   resources :users

@@ -10,9 +10,9 @@ class PaintingsController < ApplicationController
                 blurb: single_painting["labeltext"],
                 artist: single_painting["people"][0]["name"],
                 dated: single_painting["dated"],
-                medium: single_painting["medium"],
+                style: single_painting["medium"],
                     ham_id: single_painting["objectid"],
-                    gallery_id: single_painting["gallery"]["galleryid"]
+                    museum_location: single_painting["gallery"]["galleryid"]
             }
             
         render json: result, status: :accepted
@@ -27,9 +27,9 @@ class PaintingsController < ApplicationController
                     blurb: result["labeltext"],
                     artist: result["people"][0]["name"],
                     dated: result["dated"],
-                    medium: result["medium"],
+                    style: result["medium"],
                     ham_id: result["id"],
-                    gallery_id: single_painting["gallery"]["galleryid"]
+                    museum_location: result["gallery"]["galleryid"]
                 }
                 
             end

@@ -11,8 +11,9 @@ class GalleriesController < ApplicationController
                 blurb: result["labeltext"],
                 artist: result["people"][0]["name"],
                 dated: result["dated"],
-                medium: result["medium"],
-                    ham_id: result["id"]
+                style: result["medium"],
+                ham_id: result["id"],
+                museum_location: result["gallery"]["galleryid"]
             }
             
         end
@@ -42,4 +43,9 @@ class GalleriesController < ApplicationController
         render json: results
     end
 
+    def my_gallery
+        my_gallery = Gallery.find_by(user: current_user)
+        
+        render json: my_gallery
+    end
 end
