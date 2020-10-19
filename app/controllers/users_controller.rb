@@ -26,10 +26,7 @@ class UsersController < ApplicationController
       end
     end
 
-    def index
-      byebug
-    end
-
+    
     def add_favorites
       
       
@@ -52,7 +49,7 @@ class UsersController < ApplicationController
       # rename gallery_id
       gallery = Gallery.find_or_create_by(user: current_user)
       GalleryPainting.create(gallery: gallery, painting: new_favorite, comment: params[:comment])
-      byebug
+      
     end
 
   private

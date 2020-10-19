@@ -13,24 +13,14 @@ class GalleriesController < ApplicationController
                 dated: result["dated"],
                 style: result["medium"],
                 ham_id: result["id"],
-                museum_location: result["gallery"]["galleryid"]
+                museum_location: params[:id]
             }
             
         end
         
         prettified.compact!
-        # byebug
-        # img = result[0]["images"][0]["baseimageurl"]
-        # division = result[0]["division"]
-        # blurb: result[0]["labeltext"]
-        # artist: result[0]["people"][0]["name"]
-        # dated: result[0]["dated"]
-        # medium: result[0]["medium"]
-        # id = results[0]["id"]
-        #  if results["info"]["next"]
-            # next_page = results["info"]["pages"].to_i + 1
-    # end
         
+    
         render json: prettified
     end
 
@@ -44,8 +34,7 @@ class GalleriesController < ApplicationController
     end
 
     def my_gallery
-        my_gallery = Gallery.find_by(user: current_user)
-        
+        my_gallery = Gallery.find_by(user: current_user)        
         render json: my_gallery
     end
 end
