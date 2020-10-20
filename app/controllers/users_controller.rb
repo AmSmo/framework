@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     end
  
     def auth
-      render json: { user: current_user }, status: :accepted
+      render json: { user: UserSerializer.new(@user) }, status: :accepted
     end
 
     def login

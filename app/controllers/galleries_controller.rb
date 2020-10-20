@@ -26,10 +26,6 @@ class GalleriesController < ApplicationController
 
     def floors
         results = Api.floors(params[:id])
-        # gallerynumber = result[0]["gallerynumber"]
-        # decription = result[0]["labeltext"]
-        # name = results["records"][0]["name"]
-        
         render json: results
     end
 
