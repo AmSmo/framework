@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       # rename gallery_id
       gallery = Gallery.find_or_create_by(user: current_user)
       comment = GalleryPainting.create(gallery: gallery, painting: new_favorite, comment: params[:comment])
-      render json: comment, status: :accepted
+      render json: {comment: comment, user: current_user}, status: :accepted
     end
 
   private
