@@ -30,7 +30,8 @@ class GalleriesController < ApplicationController
     end
 
     def my_gallery
-        my_gallery = Gallery.find_by(user: current_user)        
+        my_gallery = Gallery.find_by(user: current_user)  
+              
         render json: my_gallery
     end
 end
