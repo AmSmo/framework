@@ -29,7 +29,7 @@ class PaintingsController < ApplicationController
                     dated: result["dated"],
                     style: result["medium"],
                     ham_id: result["id"],
-                    museum_location: result["gallery"]["galleryid"]
+                    museum_location: result["galleryid"]
                 }
                 
             end
