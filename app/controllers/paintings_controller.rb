@@ -4,6 +4,13 @@ class PaintingsController < ApplicationController
      def show
         single_painting = Api.painting(params[:id])
         
+        return_comment = ""
+        comment = current_user.gallery_paintings.find{|gp| gp.painting.ham_id === single_painting["objectid"]}
+        if comment
+            return_comment = comment.comment
+        end
+        
+        user = UserSerializer.new(current_user)
         result = {image: single_painting["images"][0]["baseimageurl"],
             title: single_painting["title"],
                 division: single_painting["division"],
@@ -12,7 +19,10 @@ class PaintingsController < ApplicationController
                 dated: single_painting["dated"],
                 style: single_painting["medium"],
                     ham_id: single_painting["objectid"],
-                    museum_location: single_painting["gallery"]["galleryid"]
+                    museum_location: single_painting["gallery"]["galleryid"],
+                    comment: return_comment,
+                    user: user
+                   
             }
             
         render json: result, status: :accepted
@@ -20,6 +30,7 @@ class PaintingsController < ApplicationController
 
     def search
         results = Api.keyword_search(params[:keyword])
+        
         if results.length > 0
             prettified = results.map do |result|
                 {image: result["images"][0]["baseimageurl"],
@@ -29,7 +40,7 @@ class PaintingsController < ApplicationController
                     dated: result["dated"],
                     style: result["medium"],
                     ham_id: result["id"],
-                    museum_location: result["galleryid"]
+                    
                 }
                 
             end
