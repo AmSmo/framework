@@ -11,8 +11,9 @@ class Api < ApplicationRecord
         url = "https://api.harvardartmuseums.org/object?gallery=#{gallery_number}&size=#{size}&apikey=#{ENV['HAM_KEY']}"
         response = Api.api_call(url)
         with_images = response["records"].select do |resp|
-            resp["images"].length > 0
+            resp["images"] && resp["images"].length > 0 
         end
+        
         if with_images.length < 6 && size.to_i <= 18
             return Api.gallery(gallery_number, size + 10)
         else

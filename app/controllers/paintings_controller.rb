@@ -19,12 +19,13 @@ class PaintingsController < ApplicationController
                 dated: single_painting["dated"],
                 style: single_painting["medium"],
                     ham_id: single_painting["objectid"],
-                    museum_location: single_painting["gallery"]["galleryid"],
                     comment: return_comment,
                     user: user
-                   
-            }
-            
+                    
+                }
+                if  single_painting["gallery"]
+                    result[:museum_location] = single_painting["gallery"]["galleryid"]
+                end
         render json: result, status: :accepted
     end
 
@@ -33,16 +34,22 @@ class PaintingsController < ApplicationController
         
         if results.length > 0
             prettified = results.map do |result|
-                {image: result["images"][0]["baseimageurl"],
+              
+                object = {
                     division: result["division"],
                     blurb: result["labeltext"],
-                    artist: result["people"][0]["name"],
                     dated: result["dated"],
                     style: result["medium"],
                     ham_id: result["id"],
                     
                 }
-                
+                if result["images"] 
+                    object[:image] = result["images"][0]["baseimageurl"]
+                end
+                if result["people"] 
+                    object[:artist] =result["people"][0]["name"]
+                end
+                object
             end
             prettified.compact!
             
