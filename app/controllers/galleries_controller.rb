@@ -24,6 +24,12 @@ class GalleriesController < ApplicationController
         render json: prettified
     end
 
+    def update
+        thisGal = Gallery.find_by(user: current_user)
+        thisGal.update(name: params[:description])
+        render status: :accepted
+    end
+
     def floors
         results = Api.floors(params[:id])
         render json: results
