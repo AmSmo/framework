@@ -5,6 +5,7 @@ class UsersController < ApplicationController
         @user = User.create(user_params)
         
         if @user.valid?
+          Gallery.create(user: @user)
             token = encode_token({user_id: @user.id})
             render json: { user: UserSerializer.new(@user), jwt: token}, status: :accepted
         else

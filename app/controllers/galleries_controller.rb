@@ -27,7 +27,7 @@ class GalleriesController < ApplicationController
     def update
         thisGal = Gallery.find_by(user: current_user)
         thisGal.update(name: params[:description])
-        render status: :accepted
+        render json: current_user, status: :accepted
     end
 
     def floors
